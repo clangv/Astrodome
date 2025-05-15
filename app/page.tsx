@@ -1,390 +1,382 @@
+import type React from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { ArrowRight, Briefcase, Users, BookOpen, Award, Clock } from "lucide-react"
+import { ArrowRight, Rocket, Zap, Award, BookOpen } from "lucide-react"
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="sticky top-0 z-50 w-full border-b bg-white">
-        <div className="container flex items-center justify-between h-16 px-4 md:px-6">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="font-bold text-2xl text-[#3B82F6]">Astrodome</div>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6 text-sm">
-            <Link href="/marketplace" className="font-medium transition-colors hover:text-[#3B82F6]">
-              Marketplace
+      <header className="container z-10 py-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Rocket className="w-8 h-8 text-primary" />
+            <span className="text-2xl font-bold">Astrodome</span>
+          </div>
+          <nav className="hidden md:flex items-center gap-6">
+            <Link href="/opportunities" className="text-muted-foreground hover:text-foreground transition-colors">
+              Opportunities
             </Link>
-            <Link href="/community" className="font-medium transition-colors hover:text-[#3B82F6]">
-              Community
-            </Link>
-            <Link href="/learn" className="font-medium transition-colors hover:text-[#3B82F6]">
+            <Link href="/learn" className="text-muted-foreground hover:text-foreground transition-colors">
               Learn
             </Link>
-            <Link href="/events" className="font-medium transition-colors hover:text-[#3B82F6]">
+            <Link href="/events" className="text-muted-foreground hover:text-foreground transition-colors">
               Events
+            </Link>
+            <Link href="/marketplace" className="text-muted-foreground hover:text-foreground transition-colors">
+              Marketplace
             </Link>
           </nav>
           <div className="flex items-center gap-4">
-            <Link href="/profile">
-              <Button variant="ghost" size="sm" className="hidden md:flex">
-                My Profile
-              </Button>
+            <Link href="/auth/login">
+              <Button variant="ghost">Login</Button>
             </Link>
-            <Link href="/dashboard">
-              <Button className="bg-[#3B82F6] hover:bg-[#2563EB]">Dashboard</Button>
+            <Link href="/auth/register/contributor">
+              <Button>Get Started</Button>
             </Link>
           </div>
         </div>
       </header>
+
+      <StarField />
+
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-[#EFF6FF] to-white">
+        <section className="py-20 md:py-32">
           <div className="container px-4 md:px-6">
-            <div className="grid gap-6 lg:grid-cols-3 lg:gap-12 items-start">
-              <div className="lg:col-span-2 flex flex-col justify-center space-y-4">
-                <div className="space-y-2">
-                  <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-[#1E3A8A]">
-                    Build Your Web3 Career
-                  </h1>
-                  <p className="max-w-[600px] text-gray-600 md:text-xl">
-                    Connect with top projects, showcase your skills, and earn in crypto while building the future of the
-                    web.
-                  </p>
-                </div>
-                <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Link href="/marketplace">
-                    <Button className="bg-[#3B82F6] hover:bg-[#2563EB]">Find Opportunities</Button>
-                  </Link>
-                  <Link href="/profile/create">
-                    <Button variant="outline">Create Profile</Button>
-                  </Link>
-                </div>
-
-                <div className="relative w-full max-w-[500px] aspect-video rounded-xl overflow-hidden bg-[#BFDBFE] flex items-center justify-center mt-6 lg:hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#93C5FD] to-[#3B82F6] opacity-20"></div>
-                  <div className="relative z-10 text-center p-6">
-                    <div className="text-5xl mb-4">👩‍💻</div>
-                    <p className="text-[#1E3A8A] font-medium">Join 10,000+ builders in the Solana ecosystem</p>
-                  </div>
-                </div>
+            <div className="flex flex-col items-center gap-4 text-center">
+              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
+                <span className="gradient-text">Explore the Universe</span> of Opportunities
+              </h1>
+              <p className="max-w-[700px] text-muted-foreground md:text-xl">
+                Connect with sponsors, showcase your skills, and earn rewards in the decentralized talent ecosystem.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 mt-6">
+                <Link href="/auth/register/contributor">
+                  <Button size="lg" className="gap-2">
+                    Join as Contributor
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link href="/auth/register/sponsor">
+                  <Button size="lg" variant="outline" className="gap-2">
+                    Become a Sponsor
+                  </Button>
+                </Link>
               </div>
+            </div>
+          </div>
+        </section>
 
-              {/* Highlighted Event Side Div */}
-              <div className="lg:col-span-1">
-                <Card className="border-[#BFDBFE] overflow-hidden shadow-lg bg-white">
-                  <div className="relative">
-                    <div className="h-40 bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] flex items-center justify-center">
-                      <div className="absolute top-4 left-4">
-                        <Badge className="bg-white text-[#3B82F6] px-3 py-1 text-sm font-medium">FEATURED EVENT</Badge>
-                      </div>
-                      <div className="text-white text-center p-6 z-10">
-                        <div className="text-4xl mb-2">🚀</div>
-                        <h3 className="text-xl font-bold">Astrodome Hackathon</h3>
-                      </div>
-                    </div>
-                  </div>
-                  <CardContent className="p-6">
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                          <Clock className="h-5 w-5 text-[#3B82F6]" />
-                          <span className="font-medium">June 15-30, 2025</span>
-                        </div>
-                        <Badge variant="outline" className="border-[#3B82F6] text-[#3B82F6]">
-                          Virtual
-                        </Badge>
-                      </div>
+        <section className="py-20 bg-secondary/30">
+          <div className="container px-4 md:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <FeatureCard
+                icon={<Zap className="h-10 w-10 text-primary" />}
+                title="Bounties & Projects"
+                description="Compete for rewards or apply to freelance projects that match your skills and interests."
+              />
+              <FeatureCard
+                icon={<Award className="h-10 w-10 text-primary" />}
+                title="Grants & Funding"
+                description="Apply for grants to fund your innovative ideas and bring them to life."
+              />
+              <FeatureCard
+                icon={<BookOpen className="h-10 w-10 text-primary" />}
+                title="Learn & Grow"
+                description="Access curated resources and earn certifications while building your portfolio."
+              />
+            </div>
+          </div>
+        </section>
 
-                      <p className="text-gray-600">
-                        Join the biggest Web3 hackathon of the year with $100K in prizes and opportunities to build the
-                        future of decentralized applications.
-                      </p>
-
-                      <div className="pt-2 space-y-2">
-                        <h4 className="font-medium text-[#1E3A8A]">Tracks:</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {["DeFi", "NFTs", "Gaming", "Social", "Infrastructure"].map((track) => (
-                            <Badge key={track} variant="secondary" className="bg-[#EFF6FF] text-[#3B82F6]">
-                              {track}
-                            </Badge>
-                          ))}
-                        </div>
+        <section className="py-20">
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col md:flex-row gap-12 items-center">
+              <div className="flex-1 space-y-4">
+                <h2 className="text-3xl font-bold tracking-tighter">For Contributors</h2>
+                <p className="text-muted-foreground">
+                  Showcase your skills, find opportunities that match your expertise, and build a portfolio of work that
+                  speaks for itself.
+                </p>
+                <ul className="space-y-2">
+                  {[
+                    "Create a comprehensive profile to showcase your skills",
+                    "Browse opportunities filtered by category and payment",
+                    "Submit work for bounties and compete for rewards",
+                    "Apply to freelance projects with tailored proposals",
+                    "Receive cryptocurrency payments for completed work",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <div className="rounded-full p-1 bg-primary/20 text-primary mt-0.5">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M10 3L4.5 8.5L2 6"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
                       </div>
-
-                      <div className="pt-2">
-                        <h4 className="font-medium text-[#1E3A8A] mb-2">Prizes:</h4>
-                        <div className="flex justify-between text-sm">
-                          <span>🥇 First Place</span>
-                          <span className="font-bold">$50,000</span>
-                        </div>
-                        <div className="flex justify-between text-sm">
-                          <span>🥈 Second Place</span>
-                          <span className="font-bold">$30,000</span>
-                        </div>
-                        <div className="flex justify-between text-sm">
-                          <span>🥉 Third Place</span>
-                          <span className="font-bold">$20,000</span>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                  <CardFooter className="bg-[#F8FAFC] border-t border-[#BFDBFE] p-6">
-                    <Button className="w-full bg-[#3B82F6] hover:bg-[#2563EB]">Register Now</Button>
-                  </CardFooter>
-                </Card>
-
-                <div className="mt-6">
-                  <Link href="/events">
-                    <Button variant="outline" className="w-full border-[#3B82F6] text-[#3B82F6]">
-                      View All Events <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </Link>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link href="/auth/register/contributor">
+                  <Button className="mt-2">Join as Contributor</Button>
+                </Link>
+              </div>
+              <div className="flex-1 relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-3xl -z-10"></div>
+                <div className="border rounded-xl overflow-hidden shadow-lg">
+                  <Image
+                    src="/placeholder.svg?height=400&width=600"
+                    alt="Contributor Dashboard"
+                    width={600}
+                    height={400}
+                    className="w-full h-auto"
+                  />
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="w-full py-12 md:py-24 bg-white">
+        <section className="py-20 bg-secondary/30">
           <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-[#1E3A8A]">
-                  How Astrodome Works
-                </h2>
-                <p className="max-w-[700px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mx-auto">
-                  Connect, build, and grow in the Web3 ecosystem
+            <div className="flex flex-col md:flex-row-reverse gap-12 items-center">
+              <div className="flex-1 space-y-4">
+                <h2 className="text-3xl font-bold tracking-tighter">For Sponsors</h2>
+                <p className="text-muted-foreground">
+                  Post bounties, projects, or grants and connect with talented contributors who can bring your vision to
+                  life.
                 </p>
+                <ul className="space-y-2">
+                  {[
+                    "Publish bounties, projects, or grants aligned with your goals",
+                    "Review submissions and applications from talented contributors",
+                    "Communicate directly with contributors about requirements",
+                    "Track progress and measure impact with detailed analytics",
+                    "Manage cryptocurrency payments for completed work",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <div className="rounded-full p-1 bg-primary/20 text-primary mt-0.5">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M10 3L4.5 8.5L2 6"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </div>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link href="/auth/register/sponsor">
+                  <Button className="mt-2">Become a Sponsor</Button>
+                </Link>
               </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-              <Card className="border-[#BFDBFE] hover:shadow-md transition-shadow">
-                <CardHeader className="pb-2">
-                  <div className="w-12 h-12 rounded-full bg-[#EFF6FF] flex items-center justify-center mb-4">
-                    <Briefcase className="w-6 h-6 text-[#3B82F6]" />
-                  </div>
-                  <CardTitle className="text-xl text-[#1E3A8A]">Find Opportunities</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">
-                    Browse bounties, gigs, and full-time roles filtered to match your skills and experience level.
-                  </p>
-                </CardContent>
-                <CardFooter>
-                  <Link href="/marketplace">
-                    <Button variant="ghost" className="text-[#3B82F6] p-0 hover:bg-transparent hover:text-[#2563EB]">
-                      Explore Marketplace <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </Link>
-                </CardFooter>
-              </Card>
-              <Card className="border-[#BFDBFE] hover:shadow-md transition-shadow">
-                <CardHeader className="pb-2">
-                  <div className="w-12 h-12 rounded-full bg-[#EFF6FF] flex items-center justify-center mb-4">
-                    <Users className="w-6 h-6 text-[#3B82F6]" />
-                  </div>
-                  <CardTitle className="text-xl text-[#1E3A8A]">Build Your Network</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">
-                    Connect with mentors, form teams, and collaborate with other builders in the ecosystem.
-                  </p>
-                </CardContent>
-                <CardFooter>
-                  <Link href="/community">
-                    <Button variant="ghost" className="text-[#3B82F6] p-0 hover:bg-transparent hover:text-[#2563EB]">
-                      Join Community <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </Link>
-                </CardFooter>
-              </Card>
-              <Card className="border-[#BFDBFE] hover:shadow-md transition-shadow">
-                <CardHeader className="pb-2">
-                  <div className="w-12 h-12 rounded-full bg-[#EFF6FF] flex items-center justify-center mb-4">
-                    <BookOpen className="w-6 h-6 text-[#3B82F6]" />
-                  </div>
-                  <CardTitle className="text-xl text-[#1E3A8A]">Learn & Grow</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">
-                    Access curated resources, earn while you learn, and get mentorship from industry experts.
-                  </p>
-                </CardContent>
-                <CardFooter>
-                  <Link href="/learn">
-                    <Button variant="ghost" className="text-[#3B82F6] p-0 hover:bg-transparent hover:text-[#2563EB]">
-                      Start Learning <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </Link>
-                </CardFooter>
-              </Card>
+              <div className="flex-1 relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-secondary/20 to-primary/20 rounded-3xl blur-3xl -z-10"></div>
+                <div className="border rounded-xl overflow-hidden shadow-lg">
+                  <Image
+                    src="/placeholder.svg?height=400&width=600"
+                    alt="Sponsor Dashboard"
+                    width={600}
+                    height={400}
+                    className="w-full h-auto"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="w-full py-12 md:py-24 bg-[#EFF6FF]">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-[#1E3A8A]">
-                  Featured Opportunities
-                </h2>
-                <p className="max-w-[700px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mx-auto">
-                  Latest bounties and gigs from top Web3 projects
-                </p>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-              {[
-                {
-                  title: "Solana DeFi Dashboard UI",
-                  description: "Design and implement a user-friendly dashboard for a DeFi protocol",
-                  reward: "2,500 USDC",
-                  difficulty: "Intermediate",
-                  skills: ["UI/UX", "React", "Web3"],
-                  deadline: "7 days",
-                },
-                {
-                  title: "NFT Marketplace Integration",
-                  description: "Build an integration with our NFT marketplace API",
-                  reward: "3,000 USDC",
-                  difficulty: "Advanced",
-                  skills: ["Rust", "TypeScript", "Solana"],
-                  deadline: "14 days",
-                },
-                {
-                  title: "Web3 Tutorial Writer",
-                  description: "Create beginner-friendly tutorials for Solana development",
-                  reward: "800 USDC",
-                  difficulty: "Beginner",
-                  skills: ["Technical Writing", "Solana"],
-                  deadline: "5 days",
-                },
-              ].map((gig, index) => (
-                <Card key={index} className="bg-white border-[#BFDBFE] hover:shadow-md transition-shadow">
-                  <CardHeader>
-                    <div className="flex justify-between items-start">
-                      <CardTitle className="text-xl text-[#1E3A8A]">{gig.title}</CardTitle>
-                      <Badge className="bg-[#3B82F6]">{gig.reward}</Badge>
-                    </div>
-                    <CardDescription>{gig.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {gig.skills.map((skill, i) => (
-                        <Badge key={i} variant="outline" className="text-[#3B82F6] border-[#BFDBFE]">
-                          {skill}
-                        </Badge>
-                      ))}
-                    </div>
-                    <div className="flex justify-between text-sm text-gray-500">
-                      <span>Difficulty: {gig.difficulty}</span>
-                      <span>Deadline: {gig.deadline}</span>
-                    </div>
-                  </CardContent>
-                  <CardFooter>
-                    <Button className="w-full bg-[#3B82F6] hover:bg-[#2563EB]">Apply Now</Button>
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
-            <div className="flex justify-center mt-10">
-              <Link href="/marketplace">
-                <Button variant="outline" className="border-[#3B82F6] text-[#3B82F6]">
-                  View All Opportunities <ArrowRight className="ml-2 h-4 w-4" />
+        <section className="py-20">
+          <div className="container px-4 md:px-6 text-center">
+            <h2 className="text-3xl font-bold tracking-tighter mb-4">Join the Astrodome Community</h2>
+            <p className="max-w-[700px] mx-auto text-muted-foreground mb-8">
+              Whether you're a contributor, sponsor, mentor, or learner, there's a place for you in our ecosystem.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/auth/register/contributor">
+                <Button size="lg">Join as Contributor</Button>
+              </Link>
+              <Link href="/auth/register/sponsor">
+                <Button size="lg" variant="outline">
+                  Become a Sponsor
+                </Button>
+              </Link>
+              <Link href="/auth/register/mentor-judge">
+                <Button size="lg" variant="outline">
+                  Join as Mentor/Judge
+                </Button>
+              </Link>
+              <Link href="/auth/register/learner">
+                <Button size="lg" variant="outline">
+                  Start Learning
                 </Button>
               </Link>
             </div>
           </div>
         </section>
-
-        <section className="w-full py-12 md:py-24 bg-white">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-[#1E3A8A]">
-                  Success Stories
-                </h2>
-                <p className="max-w-[700px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mx-auto">
-                  Meet the builders who found success through Astrodome
-                </p>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-              <Card className="border-[#BFDBFE] hover:shadow-md transition-shadow">
-                <CardHeader>
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-full bg-[#BFDBFE] flex items-center justify-center">
-                      <span className="text-2xl">👨‍💻</span>
-                    </div>
-                    <div>
-                      <CardTitle className="text-xl text-[#1E3A8A]">Alex M.</CardTitle>
-                      <CardDescription>Full-Stack Developer</CardDescription>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">
-                    "I started with small bounties to learn Solana development. Within 6 months, I landed a full-time
-                    role at a top DeFi protocol and have contributed to projects with over $100M TVL."
-                  </p>
-                </CardContent>
-                <CardFooter>
-                  <div className="flex items-center gap-2">
-                    <Award className="h-5 w-5 text-[#3B82F6]" />
-                    <span className="text-sm text-gray-500">Completed 24 bounties</span>
-                  </div>
-                </CardFooter>
-              </Card>
-              <Card className="border-[#BFDBFE] hover:shadow-md transition-shadow">
-                <CardHeader>
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-full bg-[#BFDBFE] flex items-center justify-center">
-                      <span className="text-2xl">👩‍🎨</span>
-                    </div>
-                    <div>
-                      <CardTitle className="text-xl text-[#1E3A8A]">Priya S.</CardTitle>
-                      <CardDescription>UI/UX Designer</CardDescription>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">
-                    "Astrodome helped me transition from Web2 to Web3 design. The mentorship was invaluable, and I've
-                    now designed interfaces used by thousands of crypto users daily."
-                  </p>
-                </CardContent>
-                <CardFooter>
-                  <div className="flex items-center gap-2">
-                    <Award className="h-5 w-5 text-[#3B82F6]" />
-                    <span className="text-sm text-gray-500">Completed 18 bounties</span>
-                  </div>
-                </CardFooter>
-              </Card>
-            </div>
-          </div>
-        </section>
       </main>
-      <footer className="w-full border-t bg-[#EFF6FF] py-6">
-        <div className="container flex flex-col md:flex-row items-center justify-between gap-4 px-4 md:px-6">
-          <div className="flex items-center gap-2">
-            <div className="font-bold text-xl text-[#3B82F6]">Astrodome</div>
+
+      <footer className="border-t py-6 md:py-10">
+        <div className="container px-4 md:px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div>
+              <h3 className="font-semibold mb-3">Platform</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/opportunities" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Opportunities
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/learn" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Learn
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/events" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Events
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/marketplace" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Marketplace
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-3">Resources</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Documentation
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Guides
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                    FAQ
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Support
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-3">Company</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Blog
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Careers
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-3">Legal</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Terms
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Privacy
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Cookies
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Licenses
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
-          <nav className="flex gap-4 sm:gap-6">
-            <Link href="#" className="text-sm font-medium hover:underline underline-offset-4">
-              Terms
-            </Link>
-            <Link href="#" className="text-sm font-medium hover:underline underline-offset-4">
-              Privacy
-            </Link>
-            <Link href="#" className="text-sm font-medium hover:underline underline-offset-4">
-              Contact
-            </Link>
-          </nav>
-          <div className="text-sm text-gray-500">© 2025 Astrodome. All rights reserved.</div>
+          <div className="flex flex-col md:flex-row justify-between items-center mt-8 pt-8 border-t">
+            <div className="flex items-center gap-2 mb-4 md:mb-0">
+              <Rocket className="w-5 h-5 text-primary" />
+              <span className="font-semibold">Astrodome</span>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              © {new Date().getFullYear()} Astrodome. All rights reserved.
+            </p>
+          </div>
         </div>
       </footer>
+    </div>
+  )
+}
+
+function StarField() {
+  return (
+    <div className="star-field">
+      {Array.from({ length: 100 }).map((_, i) => {
+        const size = Math.random() * 2 + 1
+        const style = {
+          top: `${Math.random() * 100}%`,
+          left: `${Math.random() * 100}%`,
+          width: `${size}px`,
+          height: `${size}px`,
+          "--duration": `${Math.random() * 5 + 2}s`,
+        } as React.CSSProperties
+
+        return <div key={i} className="star" style={style} />
+      })}
+    </div>
+  )
+}
+
+function FeatureCard({
+  icon,
+  title,
+  description,
+}: {
+  icon: React.ReactNode
+  title: string
+  description: string
+}) {
+  return (
+    <div className="card-glow flex flex-col items-center text-center p-6 rounded-xl border bg-card">
+      <div className="mb-4 p-3 rounded-full bg-primary/10">{icon}</div>
+      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+      <p className="text-muted-foreground">{description}</p>
     </div>
   )
 }
