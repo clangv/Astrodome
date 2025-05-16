@@ -4,7 +4,7 @@ import { ReactNode } from "react"
 import Link from "next/link"
 import { Wallet } from "@coinbase/onchainkit/wallet"
 import MainSidebar from "@/components/main-sidebar"
-
+import { WalletProvider } from '@coinbase/onchainkit/wallet'
 
 export default function ContributorLayout({ children }: { children: ReactNode }) {
   return (
@@ -25,7 +25,9 @@ export default function ContributorLayout({ children }: { children: ReactNode })
               </Link>
               <Wallet /> {/* shadcn-styled inside OnchainKit */}
             </header>
-            {children}</MainSidebar>
+            <WalletProvider>
+      {children}
+    </WalletProvider></MainSidebar>
         </main>
       </div>
     </div>
