@@ -96,7 +96,7 @@ export default function MainSidebar({ children }: { children: ReactNode }) {
   const [role, setRole] = React.useState<string | null>(null)
 
   React.useEffect(() => {
-    setRole(localStorage.getItem('astro-role'))
+    setRole(localStorage.getItem('default'))
   }, [])
 
   const routes = role && ROUTES_BY_ROLE[role] ? ROUTES_BY_ROLE[role] : ROUTES_BY_ROLE['default']
